@@ -16,7 +16,7 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
         ocupacion: "",
         empresa: "",
         area: "",
-        cajaCompensacion: ""
+        cajaCompensacion: ""1
     });
     const [porcentajes, setPorcentajes] = useState({})
     const [totalBienes, setTotalBienes] = useState(0)
@@ -26,25 +26,6 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
     const [option, setOption] = useState({});
 
 
-    // const chartData = {
-    //     labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple'],
-    //     datasets: [
-    //       {
-    //         data: [30, 15, 25, 20, 10],
-    //         backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF'],
-    //       },
-    //     ],
-    // };
-
-    // useEffect(() => {
-    //     console.log(answers)
-    //     calculatePercentages()
-    //     setTimeout(() => {
-    //         html2canvas(chartRef.current.canvas).then((canvas) => {
-    //           setImageData(canvas.toDataURL('image/png'));
-    //         });
-    //       }, 1000);
-    // }, [])
     useEffect(() => {
         console.log(answers)
         setChartData(calculatePercentages())
@@ -58,13 +39,6 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
         }, 1000);
     }, []);
 
-    // useEffect(() => {
-    //     if (chartRef.current) {
-    //         html2canvas(chartRef.current.canvas).then((canvas) => {
-    //             setImageData(canvas.toDataURL('image/png'));
-    //         });
-    //     }
-    // }, []);
 
 
     // Función para actualizar los valores de los campos
@@ -86,19 +60,19 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
         let porcentajeSi3 = 0, porcentajeNo3 = 0;
         let porcentajeSi4 = 0, porcentajeNo4 = 0;
 
-        // Ejemplo de cálculo, asumiendo que cada sección tiene 4 preguntas
+      
         Object.keys(answers).forEach((questionId, index) => {
             const answer = answers[`question${index + 3}`];
-            if (index >= 0 && index < 4) { // Primera sección
+            if (index >= 0 && index < 4) { 
                 if (answer === "Sí") porcentajeSi1++;
                 else porcentajeNo1++;
-            } else if (index >= 4 && index < 8) { // Segunda sección
+            } else if (index >= 4 && index < 8) { 
                 if (answer === "Sí") porcentajeSi2++;
                 else porcentajeNo2++;
-            } else if (index >= 8 && index < 12) { // Tercera sección
+            } else if (index >= 8 && index < 12) { 
                 if (answer === "Sí") porcentajeSi3++;
                 else porcentajeNo3++;
-            } else if (index >= 12 && index < 16) { // Cuarta sección
+            } else if (index >= 12 && index < 16) {
                 if (answer === "Sí") porcentajeSi4++;
                 else porcentajeNo4++;
             }

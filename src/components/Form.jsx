@@ -25,6 +25,8 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
 
     // Verificar si todos los campos están completos
     const isFormComplete = Object.values(formData).every((value) => value.trim() !== "");
+    
+
 
     return (
         <div
@@ -75,7 +77,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         value={formData.nombre}
                         onChange={(e) => {
                             if (/^[a-zA-Z\s]*$/.test(e.target.value))
-                            handleChange(e);
+                                handleChange(e);
                             setUserName(e.target.value);
                         }}
                         placeholder="Nombre completo"
@@ -126,7 +128,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         name="numeroDocumento"
                         value={formData.numeroDocumento}
                         onChange={(e) => {
-                            if (/^\d*$/.test(e.target.value)) { // Solo números
+                            if (/^\d*$/.test(e.target.value)) { 
                                 handleChange(e);
                             }
                         }}
@@ -146,7 +148,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                 </div>
 
                 {/* Campo Fecha de nacimiento */}
-                <div style={{ marginBottom: "15px", textAlign: "left", maxWidth: "91%", marginLeft: "0%" }}>
+                <div style={{ marginBottom: "15px", textAlign: "left", maxWidth: "91%", marginLeft: "0%", position: "relative" }}>
                     <label style={{ color: "black", fontSize: "14px" }}>Fecha de nacimiento</label>
                     <input
                         type="date"
@@ -160,12 +162,23 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                             borderRadius: "4px",
                             border: "1px solid #ccc",
                             boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.1)",
-                            backgroundColor: "white",
-                            color: "black",
+                            backgroundColor: "white",    
+                            color: "black",              
                             transition: "border-color 0.3s",
+                            appearance: "none",         
                         }}
                     />
+                    <span style={{
+                        position: "absolute",
+                        right: "-15px",
+                        top: "70%",
+                        transform: "translateY(-60%)",
+                        pointerEvents: "none",
+                        color: "black",               
+                        fontSize: "18px"
+                    }}>📅</span>
                 </div>
+
 
                 {/* Campo Identidad de género */}
                 <div style={{ marginBottom: "15px", textAlign: "left" }}>
@@ -201,7 +214,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         name="nacionalidad"
                         value={formData.nacionalidad}
                         onChange={(e) => {
-                            if (/^[a-zA-Z\s]*$/.test(e.target.value)) { // Solo letras y espacios
+                            if (/^[a-zA-Z\s]*$/.test(e.target.value)) { 
                                 handleChange(e);
                             }
                         }}
@@ -251,7 +264,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         name="whatsapp"
                         value={formData.whatsapp}
                         onChange={(e) => {
-                            if (/^\d*$/.test(e.target.value)) { // Solo números
+                            if (/^\d*$/.test(e.target.value)) { 
                                 handleChange(e);
                             }
                         }}

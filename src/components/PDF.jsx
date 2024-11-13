@@ -187,7 +187,7 @@ const styles = StyleSheet.create({
     marginRight: 5,
   },
   imageOutsideHeader: {
-    width: 80,
+    width: 85,
     height: 70,
     position: 'absolute',
     top: 10,
@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     left: -60,
     top: 20,
   },
-  // esto es lo nuevo
+
   legendContainer1: {
     flexDirection: 'row',
     justifyContent: 'center',
@@ -250,15 +250,12 @@ const MyDocument = ({ nombre, edad, empresa, Ocupacion, preguntas, answers, perc
   return (
     <Document>
       <Page size="A4" style={styles.container}>
-        {/* Imagen a la izquierda, fuera del encabezado */}
         <Image src={imagen1} style={styles.imageOutsideHeader} />
 
-        {/* Encabezado */}
         <View style={styles.header}>
           <Text>Mi Nivel de Bienestar</Text>
         </View>
 
-        {/* Información del usuario */}
         <View style={styles.infoSection}>
           <Text style={styles.label}>Nombre:</Text>
           <Text style={styles.field}>{nombre}</Text>
@@ -501,7 +498,7 @@ const MyDocument = ({ nombre, edad, empresa, Ocupacion, preguntas, answers, perc
         <View style={styles.mensajePreventivo}>
           <Text>Para un análisis más detallado o diagnóstico, es recomendable consultar a un profesional de la salud.</Text>
         </View>
-        {/* <PieChart data={[25, 25, 25, 25]} /> Sustituir valores de prueba con datos reales */}
+        
         <View style={{width: '100%', display: "flex", alignItems: 'center', justifyContent: "center", marginVertical: 10, marginTop: 30}}>
           <Image src={imageData} style={{ width: 300, height: 300 }} />
         </View>

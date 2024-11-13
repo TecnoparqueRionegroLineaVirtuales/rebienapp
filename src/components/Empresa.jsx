@@ -9,54 +9,54 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
     showDocumentInput, setShowDocumentInput, documentNumber, setDocumentNumber,
     handleDocumentNumberChange, handleCompanyNameSubmit, showCompanyNameInput,
     setShowCompanyNameInput, showHelpMessage, setShowHelpMessage, companyNameFixed, setCompanyNameFixed, isCompanyNameFixed, setIsCompanyNameFixed, showContinueButton, setShowContinueButton, handleContinueClick,
-    showCompanyContinueButton,   setShowConsent, setShowNextEmpresa, isEditingMode, setIsEditingMode, visibleConfirmationMessages, setVisibleConfirmationMessages, confirmationMessage, setConfirmationMessage, showMessage, setShowMessage, handleCorrectClick, documentTypeLabel, showButtons, setShowButtons, showCorrectContainer, setShowCorrectContainer, documentNumberFixed, setDocumentNumberFixed, setShowCompanyContinueButton,
+    showCompanyContinueButton, setShowConsent, setShowNextEmpresa, isEditingMode, setIsEditingMode, visibleConfirmationMessages, setVisibleConfirmationMessages, confirmationMessage, setConfirmationMessage, showMessage, setShowMessage, handleCorrectClick, documentTypeLabel, showButtons, setShowButtons, showCorrectContainer, setShowCorrectContainer, documentNumberFixed, setDocumentNumberFixed, setShowCompanyContinueButton,
 }) => {
 
     return (
         <div
             style={{
-                position: 'fixed',
-                right: '30px',
-                bottom: '95px',
-                height: '480px',
-                backgroundColor: '#fff',
-                borderRadius: '8px',
-                paddingBottom: '20px',
-                width: '22%',
-                boxShadow: '0px 0px 15px rgba(0, 0, 0, 0.3)',
-                textAlign: 'center',
+                position: "fixed",
+                right: "30px",
+                bottom: "95px",
+                width: "310px",
+                height: "480px",
+                backgroundColor: "#fff",
+                borderRadius: "8px",
+                padding: "20px",
+                boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.3)",
+                textAlign: "center",
                 zIndex: 1000,
-                fontFamily: 'Arial, sans-serif',
-                display: 'flex',
-                flexDirection: 'column',
-                justifyContent: 'flex-start',
-                overflowY: 'auto',
-                overflowX: 'hidden',
+                fontFamily: "Arial, sans-serif",
+                display: "flex",
+                flexDirection: "column",
+                justifyContent: "flex-start",
+                overflowY: "auto",
+                overflowX: "hidden",
             }}
         >
-             <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-    <FontAwesomeIcon
-      icon={faAngleLeft}
-      style={{
-        fontSize: "25px",
-        color: "#242B56",
-        cursor: "pointer",
-        marginRight: "10px",
-        marginLeft: "25px",
-        marginTop: "10px"
-      }}
-      onClick={() => {
-        setShowNextEmpresa(false);
-        setShowConsent(true);
-      }}
-    />
-    </div>
+            <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
+                <FontAwesomeIcon
+                    icon={faAngleLeft}
+                    style={{
+                        fontSize: "25px",
+                        color: "#242B56",
+                        cursor: "pointer",
+                        marginRight: "10px",
+                        marginLeft: "1px",
+                        marginTop: "-5px"
+                    }}
+                    onClick={() => {
+                        setShowNextEmpresa(false);
+                        setShowConsent(true);
+                    }}
+                />
+            </div>
             {visibleEmpresaMessages.map((message) => (
                 <div key={message.id} style={{ display: 'flex', alignItems: 'flex-start', marginTop: '10px' }}>
                     <img
                         src={message.img}
                         alt="Empresa"
-                        style={{ width: '60px', height: '40px', margin: '10px', marginRight: '10px' }}
+                        style={{ width: '60px', height: '40px', margin: '-5px', marginRight: '10px' }}
                     />
                     <div
                         style={{
@@ -137,8 +137,8 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                                             border: '1px solid #ccc',
                                             color: '#fff',
                                             padding: '10px',
-                                            width: '200px',
-                                            height: '20px',
+                                            width: '90%', 
+                                            maxWidth: '190px',
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center',
@@ -157,7 +157,8 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                                         style={{
                                             padding: '10px',
                                             borderRadius: '5px',
-                                            width: '100%',
+                                            width: '90%', 
+                                            maxWidth: '200px', 
                                             border: '1px solid #ccc',
                                             backgroundColor: '#f9f9f9',
                                             color: '#000',
@@ -177,7 +178,8 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                                                 border: 'none',
                                                 cursor: 'pointer',
                                                 fontSize: '16px',
-                                                width: '100%',
+                                                width: '100%', 
+                                                maxWidth: '250px', 
                                             }}
                                         >
                                             Continuar
@@ -194,12 +196,12 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                                     <div
                                         style={{
                                             backgroundColor: '#242B56',
-                                            borderRadius: '3px',
+                                            borderRadius: '5px',
                                             border: '1px solid #ccc',
                                             color: '#fff',
                                             padding: '10px',
-                                            width: '200px',
-                                            height: '20px',
+                                            width: '90%', 
+                                            maxWidth: '190px', 
                                             display: 'flex',
                                             alignItems: 'center',
                                             justifyContent: 'center',
@@ -218,7 +220,8 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                                         style={{
                                             padding: '10px',
                                             borderRadius: '5px',
-                                            width: '100%',
+                                            width: '90%', 
+                                            maxWidth: '200px', 
                                             border: '1px solid #ccc',
                                             backgroundColor: '#f9f9f9',
                                             color: '#000',
@@ -249,18 +252,25 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                         )}
 
                         {showButtons && (
-                            <div style={{ marginTop: '15px', textAlign: 'center' }}>
+                            <div style={{
+                                marginTop: '15px',
+                                textAlign: 'center',
+                                display: 'flex',
+                                justifyContent: 'center',
+                                gap: '10px', 
+                            }}>
                                 <button
                                     onClick={handleCorrectClick}
                                     style={{
                                         padding: '10px 20px',
-                                        marginRight: '10px',
                                         borderRadius: '5px',
                                         backgroundColor: '#73B72B',
                                         color: '#fff',
                                         border: 'none',
                                         cursor: 'pointer',
                                         fontSize: '16px',
+                                        flex: '1', 
+                                        maxWidth: '100px', 
                                     }}
                                 >
                                     Correcto
@@ -275,12 +285,15 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                                         border: 'none',
                                         cursor: 'pointer',
                                         fontSize: '16px',
+                                        flex: '1', 
+                                        maxWidth: '100px', 
                                     }}
                                 >
                                     Modificar
                                 </button>
                             </div>
                         )}
+
                     </div>
                 </div>
             ))}
@@ -308,23 +321,23 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                         overflowX: "hidden",
                     }}
                 >
-                      <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
-      <FontAwesomeIcon
-        icon={faAngleLeft}
-        style={{
-          fontSize: "25px", 
-          color: "#242B56",
-          cursor: "pointer",
-          marginRight: "10px",
-          marginLeft: "10px",
-          marginTop: "5px" 
-        }}
-        onClick={() => {
-            setShowNextEmpresa(true);  
-          setShowCorrectContainer(false);
-        }}
-      />
-      </div>
+                    <div style={{ display: "flex", alignItems: "center", marginBottom: "10px" }}>
+                        <FontAwesomeIcon
+                            icon={faAngleLeft}
+                            style={{
+                                fontSize: "25px",
+                                color: "#242B56",
+                                cursor: "pointer",
+                                marginRight: "10px",
+                                marginLeft: "10px",
+                                marginTop: "5px"
+                            }}
+                            onClick={() => {
+                                setShowNextEmpresa(true);
+                                setShowCorrectContainer(false);
+                            }}
+                        />
+                    </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
                         <img src="./public/img/Rebien.png" alt="ReBien Logo" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
                         <div>

@@ -48,7 +48,7 @@ function App() {
   const [isEditingMode, setIsEditingMode] = useState(false);
   const [data1, setData1] = useState([]);
   const [answers, setAnswers] = useState({});
-  const messagesEndRef = useRef(null); 
+  const messagesEndRef = useRef(null);
 
   const messages = [
     {
@@ -363,13 +363,15 @@ function App() {
               onClick={handleCorrectClick}
               style={{
                 padding: '10px 20px',
-                marginRight: '10px',
                 borderRadius: '5px',
                 backgroundColor: '#73B72B',
                 color: '#fff',
                 border: 'none',
                 cursor: 'pointer',
                 fontSize: '16px',
+                flex: '1',
+                marginRight: '5px', 
+                maxWidth: '100px', 
               }}
             >
               Correcto
@@ -384,6 +386,8 @@ function App() {
                 border: 'none',
                 cursor: 'pointer',
                 fontSize: '16px',
+                flex: '1',
+                maxWidth: '100px', 
               }}
             >
               Modificar
@@ -503,7 +507,7 @@ function App() {
   const handleAnswer = (questionId, answer) => {
     setAnswers((prevAnswers) => ({
       ...prevAnswers,
-      [questionId]: answer, // Guarda la respuesta para cada pregunta específica
+      [questionId]: answer, 
     }));
   };
 
@@ -674,9 +678,9 @@ function App() {
         messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
       }
     };
-  
-    scrollToBottom(); // Llama a la función para desplazarse
-  
+
+    scrollToBottom(); 
+
   }, [initialSteps]);
 
 
@@ -717,9 +721,10 @@ function App() {
         <div
           style={{
             position: "fixed",
-            right: "80px",
-            bottom: "90px",
-            width: "300px",
+            right: "30px",
+            bottom: "95px",
+            width: "310px",
+            height: "480px",
             zIndex: 1000,
           }}
         >
@@ -729,18 +734,18 @@ function App() {
                 position: "fixed",
                 right: "30px",
                 bottom: "95px",
+                width: "310px",
                 height: "480px",
                 backgroundColor: "#fff",
                 borderRadius: "8px",
-                paddingBottom: "20px",
-                width: "22%",
+                padding: "20px",
                 boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.3)",
                 textAlign: "center",
                 zIndex: 1000,
                 fontFamily: "Arial, sans-serif",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: "flex-start",
                 overflowY: "auto",
                 overflowX: "hidden",
               }}
@@ -773,7 +778,6 @@ function App() {
                   RED DE BIENESTAR
                 </span>
               </div>
-
               <p
                 style={{
                   marginTop: "50px",
@@ -782,9 +786,6 @@ function App() {
                   lineHeight: "1.4",
                   textAlign: "center",
                   flexGrow: 1,
-                  display: "block",
-                  alignItems: "center",
-                  justifyContent: "center",
                   padding: "0 20px",
                 }}
               >
@@ -794,7 +795,6 @@ function App() {
                 algunos datos. Cuéntame <br />
                 <strong>¿Quién eres?</strong>
               </p>
-
               <div
                 style={{
                   display: "flex",
@@ -817,7 +817,6 @@ function App() {
                     setShowWelcome(false);
                     setUserType("persona");
                     setShowConsent(true);
-                    console.log("UserType after Persona click:", userType);
                   }}
                 >
                   Persona
@@ -828,17 +827,15 @@ function App() {
                     color: "#fff",
                     border: "none",
                     borderRadius: "4px",
-                    padding: "20px 0",
+                    padding: "10px 0",
                     cursor: "pointer",
                     width: "100px",
-                    fontSize: "14px",
-                    fontWeight: "bold",
+                    fontSize: "16px",
                   }}
                   onClick={() => {
                     setShowWelcome(false);
                     setUserType("empresa");
                     setShowConsent(true);
-                    console.log("UserType after Empresa click:", userType);
                   }}
                 >
                   Empresa
@@ -851,18 +848,18 @@ function App() {
                 position: "fixed",
                 right: "30px",
                 bottom: "95px",
+                width: "310px",
                 height: "480px",
                 backgroundColor: "#fff",
                 borderRadius: "8px",
-                paddingBottom: "20px",
-                width: "22%",
+                padding: "20px",
                 boxShadow: "0px 0px 15px rgba(0, 0, 0, 0.3)",
                 textAlign: "center",
                 zIndex: 1000,
                 fontFamily: "Arial, sans-serif",
                 display: "flex",
                 flexDirection: "column",
-                justifyContent: "space-between",
+                justifyContent: "flex-start",
                 overflowY: "auto",
                 overflowX: "hidden",
               }}
@@ -872,48 +869,29 @@ function App() {
                   icon={faAngleLeft}
                   style={{
                     fontSize: "30px",
-                    color: "#242B56", cursor: "pointer",
-                    marginRight: "5px",
-                    marginLeft: "10px"
+                    color: "#242B56",
+                    cursor: "pointer",
+                    marginRight: "10px",
+                    marginLeft: "-10px"
                   }}
                   onClick={() => {
                     setShowWelcome(true);
                     setShowConsent(false);
                   }}
                 />
-
-
-                <p
+                <img
+                  src="../public/img/Rebien.png"
+                  alt="Icono"
                   style={{
-                    backgroundColor: "#ffff",
-                    color: "#242B56",
-                    padding: "10px 0",
-                    borderRadius: "4px 4px 0 0",
-                    fontSize: "18px",
-                    fontWeight: "bold",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    width: "100%",
-                    marginBottom: "10px",
-                    margin: 0,
+                    width: "60px",
+                    height: "50px",
+                    marginRight: "5px",
                   }}
-                >
-                  <img
-                    src="../public/img/Rebien.png"
-                    alt="Icono"
-                    style={{
-                      width: "60px",
-                      height: "50px",
-                      marginRight: "5px",
-                    }}
-                  />
-                  <span style={{ textAlign: "left", color: "#242B56" }}>
-                    ¡ESPERO ESTES REBIEN!
-                  </span>
-                </p>
+                />
+                <span style={{ textAlign: "left", color: "#242B56", fontSize: "18px", fontWeight: "bold" }}>
+                  ¡ESPERO ESTES REBIEN!
+                </span>
               </div>
-
               <div style={{ flexGrow: 1 }}>
                 <p
                   style={{
@@ -933,8 +911,6 @@ function App() {
                   <strong>¿Estás de acuerdo?</strong>
                 </p>
               </div>
-
-
               <div style={{ display: "flex", justifyContent: "space-around" }}>
                 <button
                   style={{
@@ -947,9 +923,8 @@ function App() {
                     width: "100px",
                   }}
                   onClick={() => {
-                    console.log("Valor de userType al hacer clic en Sí:", userType);
                     if (userType === "persona") {
-                      setShowGreeting(true)
+                      setShowGreeting(true);
                       setShowConsent(false);
                     } else {
                       setShowNextEmpresa(true);
@@ -1054,7 +1029,7 @@ function App() {
                 overflowX: "hidden",
               }}
             >
-              
+
               {visibleMessages.map((message) => (
                 <div key={message.id} style={{ display: "flex", alignItems: "flex-start", marginTop: "20px", position: "relative" }}>
 
@@ -1150,7 +1125,7 @@ function App() {
                         />
                         Soy tu Asistente Virtual
                       </div>
-                    }
+                    }                  
                     enableSmoothScroll={true}
                     userBubbleStyle={{ display: "none" }}
                     botBubbleStyle={{ display: "none" }}
@@ -1167,7 +1142,7 @@ function App() {
                       overflow: "auto",
                     }}
                   />
-                   <div ref={messagesEndRef} />
+                  <div ref={messagesEndRef} />
                 </div>
                 {showNewForm && (
                   <NewForm
