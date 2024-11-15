@@ -303,177 +303,184 @@ function App() {
   };
 
   const handleContinueClick = () => {
+    console.log("Botón 'Continuar' en Número de Documento presionado");
+    console.log("Valor de documentNumber antes de fijarlo:", documentNumber);
+
+    
     setDocumentNumberFixed(documentNumber);
+    setShowContinueButton(false);
 
     const newMessage = {
-      id: visibleEmpresaMessages.length + 1,
-      text: "Por favor ingresa el Nombre de la empresa",
-      img: "./public/img/Rebien.png",
-      hasInput: true
+        id: visibleEmpresaMessages.length + 1,
+        text: "Por favor ingresa el Nombre de la empresa",
+        img: "./public/img/Rebien.png",
+        hasInput: true
     };
 
     setVisibleEmpresaMessages((prevMessages) => [...prevMessages, newMessage]);
-
-    setShowContinueButton(false);
     setShowCompanyNameInput(true);
-  };
+};
 
-  const handleCompanyNameInputChange = (e) => {
+const handleCompanyNameInputChange = (e) => {
     const value = e.target.value;
     setCompanyName(value);
+    setShowCompanyContinueButton(true);
+};
 
-    setShowCompanyContinueButton(value.length > 0);
-  };
-
-  const handleCompanyNameSubmit = () => {
-    console.log("Botón 'Continuar' presionado");
-    console.log("Nombre de la empresa:", companyName);
+const handleCompanyNameSubmit = () => {
+    console.log("Botón 'Continuar' en Nombre Empresa presionado");
+    console.log("Nombre de la empresa (actualizado):", companyName);
+    console.log("Número de documento (actualizado):", documentNumber);
 
     setCompanyNameFixed(companyName);
+    setDocumentNumberFixed(documentNumber);
     setIsCompanyNameFixed(true);
+    setIsEditingMode(false);
 
     const documentTypeLabel =
-      selectedDocumentType === "cedula_ciudadania"
-        ? "Cédula de Ciudadanía"
-        : selectedDocumentType === "cedula_extranjeria"
-          ? "Cédula de Extranjería"
-          : "Pasaporte";
+        selectedDocumentType === "cedula_ciudadania"
+            ? "Cédula de Ciudadanía"
+            : selectedDocumentType === "cedula_extranjeria"
+            ? "Cédula de Extranjería"
+            : "Pasaporte";
 
+    
     const verificationMessage = {
-      id: visibleEmpresaMessages.length + 1,
-      text: (
-        <>
-          <p style={{ marginBottom: "15px" }}>
-            <strong>Por favor verifica si los datos están correctos:</strong>
-          </p>
-          <p style={{ marginBottom: "10px" }}>
-            <strong>Tipo de documento:</strong><br />
-            {documentTypeLabel}
-          </p>
-          <p style={{ marginBottom: "10px" }}>
-            <strong>Número de documento:</strong><br />
-            {documentNumber}
-          </p>
-          <p style={{ marginBottom: "10px" }}>
-            <strong>Nombre de la empresa:</strong><br />
-            {companyName}
-          </p>
-          <div style={{ marginTop: '15px', textAlign: 'center' }}>
-            <button
-              onClick={handleCorrectClick}
-              style={{
-                padding: '10px 20px',
-                borderRadius: '5px',
-                backgroundColor: '#73B72B',
-                color: '#fff',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '16px',
-                flex: '1',
-                marginRight: '5px', 
-                maxWidth: '100px', 
-              }}
-            >
-              Correcto
-            </button>
-            <button
-              onClick={handleModifyClick}
-              style={{
-                padding: '10px 20px',
-                borderRadius: '5px',
-                backgroundColor: '#242B56',
-                color: '#fff',
-                border: 'none',
-                cursor: 'pointer',
-                fontSize: '16px',
-                flex: '1',
-                maxWidth: '100px', 
-              }}
-            >
-              Modificar
-            </button>
-          </div>
-        </>
-      ),
-      img: "./public/img/Rebien.png",
+        id: visibleEmpresaMessages.length + 1,
+        text: (
+            <>
+                <p style={{ marginBottom: "15px" }}>
+                    <strong>Por favor verifica si los datos están correctos:</strong>
+                </p>
+                <p style={{ marginBottom: "10px" }}>
+                    <strong>Tipo de documento:</strong><br />
+                    {documentTypeLabel}
+                </p>
+                <p style={{ marginBottom: "10px" }}>
+                    <strong>Número de documento:</strong><br />
+                    {documentNumber} 
+                </p>
+                <p style={{ marginBottom: "10px" }}>
+                    <strong>Nombre de la empresa:</strong><br />
+                    {companyName} 
+                </p>
+                <div style={{ marginTop: '15px', textAlign: 'center' }}>
+                    <button
+                        onClick={handleCorrectClick}
+                        style={{
+                            padding: '10px 20px',
+                            borderRadius: '5px',
+                            backgroundColor: '#73B72B',
+                            color: '#fff',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontSize: '16px',
+                            flex: '1',
+                            marginRight: '5px',
+                            maxWidth: '100px',
+                        }}
+                    >
+                        Correcto
+                    </button>
+                    <button
+                        onClick={handleModifyClick}
+                        style={{
+                            padding: '10px 20px',
+                            borderRadius: '5px',
+                            backgroundColor: '#242B56',
+                            color: '#fff',
+                            border: 'none',
+                            cursor: 'pointer',
+                            fontSize: '16px',
+                            flex: '1',
+                            maxWidth: '100px',
+                        }}
+                    >
+                        Modificar
+                    </button>
+                </div>
+            </>
+        ),
+        img: "./public/img/Rebien.png",
     };
 
-
     setVisibleEmpresaMessages((prevMessages) => [
-      ...prevMessages,
-      verificationMessage,
+        ...prevMessages,
+        verificationMessage,
     ]);
-  };
 
-  const handleCorrectClick = () => {
+    setShowContinueButton(false);
+    setShowCompanyContinueButton(false);
+};
+
+const handleCorrectClick = () => {
     console.log("Datos confirmados como correctos");
 
+    setIsCompanyNameFixed(true);
+    setDocumentNumberFixed(documentNumber);
     setShowCorrectContainer(true);
+    setShowCompanyNameInput(true); 
+};
 
-    setShowCompanyNameInput(false);
-
-    setTimeout(() => {
-      const newMessage = ` ${companyName}`;
-
-
-      setConfirmationMessage(newMessage);
-      setShowMessage(true);
-    }, 1000);
-
-  };
-
-  const handleModifyClick = () => {
+const handleModifyClick = () => {
     console.log("Permitir modificar los datos");
-
     setIsEditingMode(true);
-
-
-    setVisibleEmpresaMessages((prevMessages) =>
-      prevMessages.filter((message) => message.id !== prevMessages.length)
-    );
-
-
     setIsCompanyNameFixed(false);
     setDocumentNumberFixed(false);
+
+    console.log("Modo de edición activado. Valores actuales:");
+    console.log("companyName:", companyName);
+    console.log("documentNumber:", documentNumber);
+
+    setShowCompanyContinueButton(true);
     setShowContinueButton(false);
+
+    setVisibleEmpresaMessages((prevMessages) =>
+        prevMessages.filter((message) => message.id !== prevMessages.length)
+    );
+
     setShowDocumentInput(true);
     setShowCompanyNameInput(true);
-  };
+};
 
+const handleCompanyNameSubmitInEditMode = () => {
+    setDocumentNumberFixed(documentNumber);
+    setCompanyNameFixed(companyName);
 
-  const handleCompanyNameSubmitInEditMode = () => {
     const verificationMessage = {
-      id: visibleEmpresaMessages.length + 1,
-      text: (
-        <>
-          <p style={{ marginBottom: "15px" }}>
-            <strong>Por favor verifica si los datos están correctos:</strong>
-          </p>
-          <p style={{ marginBottom: "10px" }}>
-            <strong>Tipo de documento:</strong><br />
-            {selectedDocumentType}
-          </p>
-          <p style={{ marginBottom: "10px" }}>
-            <strong>Número de documento:</strong><br />
-            {documentNumber}
-          </p>
-          <p style={{ marginBottom: "10px" }}>
-            <strong>Nombre de la empresa:</strong><br />
-            {companyName}
-          </p>
-        </>
-      ),
-      img: "./public/img/Rebien.png",
+        id: visibleEmpresaMessages.length + 1,
+        text: (
+            <>
+                <p style={{ marginBottom: "15px" }}>
+                    <strong>Por favor verifica si los datos están correctos:</strong>
+                </p>
+                <p style={{ marginBottom: "10px" }}>
+                    <strong>Tipo de documento:</strong><br />
+                    {selectedDocumentType}
+                </p>
+                <p style={{ marginBottom: "10px" }}>
+                    <strong>Número de documento:</strong><br />
+                    {documentNumber}
+                </p>
+                <p style={{ marginBottom: "10px" }}>
+                    <strong>Nombre de la empresa:</strong><br />
+                    {companyName}
+                </p>
+            </>
+        ),
+        img: "./public/img/Rebien.png",
     };
 
-
     setVisibleEmpresaMessages((prevMessages) => [
-      ...prevMessages,
-      verificationMessage,
+        ...prevMessages,
+        verificationMessage,
     ]);
 
     setIsEditingMode(false);
-  };
+    setShowContinueButton(false);
+};
+
+
 
 
 
@@ -507,7 +514,7 @@ function App() {
   const handleAnswer = (questionId, answer) => {
     setAnswers((prevAnswers) => ({
       ...prevAnswers,
-      [questionId]: answer, 
+      [questionId]: answer,
     }));
   };
 
@@ -679,7 +686,7 @@ function App() {
       }
     };
 
-    scrollToBottom(); 
+    scrollToBottom();
 
   }, [initialSteps]);
 
@@ -1125,7 +1132,7 @@ function App() {
                         />
                         Soy tu Asistente Virtual
                       </div>
-                    }                  
+                    }
                     enableSmoothScroll={true}
                     userBubbleStyle={{ display: "none" }}
                     botBubbleStyle={{ display: "none" }}

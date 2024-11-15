@@ -16,7 +16,7 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
         ocupacion: "",
         empresa: "",
         area: "",
-        cajaCompensacion: ""1
+        cajaCompensacion: ""
     });
     const [porcentajes, setPorcentajes] = useState({})
     const [totalBienes, setTotalBienes] = useState(0)

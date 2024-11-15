@@ -26,7 +26,9 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
     // Verificar si todos los campos están completos
     const isFormComplete = Object.values(formData).every((value) => value.trim() !== "");
     
-
+    const today = new Date();
+    const maxDate = today.toISOString().split("T")[0]; 
+    const minDate = new Date(today.getFullYear() - 120, today.getMonth(), today.getDate()).toISOString().split("T")[0]; 
 
     return (
         <div
@@ -155,6 +157,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         name="fechaNacimiento"
                         value={formData.fechaNacimiento}
                         onChange={handleChange}
+                        max={maxDate} // Fecha máxima establecida como hoy
                         required
                         style={{
                             width: "100%",
@@ -162,10 +165,10 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                             borderRadius: "4px",
                             border: "1px solid #ccc",
                             boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.1)",
-                            backgroundColor: "white",    
-                            color: "black",              
+                            backgroundColor: "white",
+                            color: "black",
                             transition: "border-color 0.3s",
-                            appearance: "none",         
+                            appearance: "none",
                         }}
                     />
                     <span style={{
@@ -174,7 +177,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         top: "70%",
                         transform: "translateY(-60%)",
                         pointerEvents: "none",
-                        color: "black",               
+                        color: "black",
                         fontSize: "18px"
                     }}>📅</span>
                 </div>
