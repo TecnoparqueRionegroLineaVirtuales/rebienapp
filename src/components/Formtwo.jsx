@@ -12,7 +12,7 @@ import logo from '../assets/img/Rebien.png';
 import morado from  '../assets/img/logo-morado.png';
 import azul from '../assets/img/logo-azul.png';
 import fucsia from '../assets/img/logo-fucsia.png';
-import formIcon from '../assets/img/form-icono.png';
+import formIcon from '../assets/img/form-icon.png';
 import iconoR from '../assets/img/IconoR.png';
 
 ChartJS.register(ArcElement, Tooltip, Legend,ChartDataLabels);
