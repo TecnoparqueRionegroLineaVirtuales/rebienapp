@@ -247,6 +247,12 @@ const MyDocument = ({ nombre, edad, empresa, Ocupacion, preguntas, answers, perc
     { value: 25, color: '#4CBBC0' },
     { value: 25, color: '#D3398D' },
   ];
+  const edad1 =()=>{
+    const year = new Date(edad).getFullYear();
+    const yearActually= new Date().getFullYear();
+    const edad2 = yearActually - year
+    return(edad2)
+  }
   return (
     <Document>
       <Page size="A4" style={styles.container}>
@@ -257,15 +263,15 @@ const MyDocument = ({ nombre, edad, empresa, Ocupacion, preguntas, answers, perc
         </View>
 
         <View style={styles.infoSection}>
-          <Text style={styles.label}>Nombre:</Text>
+          <Text style={styles.label}>Nombre: </Text>
           <Text style={styles.field}>{nombre}</Text>
           <Text style={styles.label}>Edad:</Text>
-          <Text style={styles.field}>{edad}</Text>
+          <Text style={styles.field}>{edad1()}</Text>
         </View>
         <View style={styles.infoSection}>
-          <Text style={styles.label}>Empresa:</Text>
+          <Text style={styles.label}>Empresa:  </Text>
           <Text style={styles.field}>{empresa}</Text>
-          <Text style={styles.label}>Ocupacion:</Text>
+          <Text style={styles.label}>Ocupacion:  </Text>
           <Text style={styles.field}>{Ocupacion}</Text>
         </View>
 
@@ -273,16 +279,6 @@ const MyDocument = ({ nombre, edad, empresa, Ocupacion, preguntas, answers, perc
         <View style={styles.imcContainer}>
           <View style={styles.imcRow}>
             <Text style={styles.label}>IMC:</Text>
-          </View>
-
-          {/* Tabla de IMC alineada horizontalmente debajo de "Ocupación" */}
-          <View style={styles.imcTable}>
-            <View style={[styles.imcCell, { borderColor: '#000', borderWidth: 1, backgroundColor: '#FFFFFF' }]}>
-              <Text style={{ textAlign: 'center', color: '#000' }}>#¡DIV/0!</Text>
-            </View>
-            <View style={[styles.imcCell, styles.wideCell, { borderColor: '#000', borderWidth: 1, backgroundColor: '#A0A7B4' }]}>
-              <Text style={{ textAlign: 'center', color: 'red' }}>#¡DIV/0!</Text>
-            </View>
           </View>
         </View>
 

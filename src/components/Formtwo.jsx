@@ -10,7 +10,7 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 
 ChartJS.register(ArcElement, Tooltip, Legend,ChartDataLabels);
 
-const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answers }) => {
+const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answers, datos }) => {
     // Estados para almacenar los valores de los campos
     const [formData, setFormData] = useState({
         ocupacion: "",
@@ -24,7 +24,7 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
     const [imageData, setImageData] = useState(null);
     const [chartData, setChartData] = useState({});
     const [option, setOption] = useState({});
-
+    const [showWeightHeightFields, setShowWeightHeightFields] = useState(true);
 
     useEffect(() => {
         console.log(answers)
@@ -51,7 +51,9 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
     };
 
     // Verificar si todos los campos están completos
-    const isFormComplete = Object.values(formData).every((value) => value.trim() !== "");
+    const isFormComplete = Object.keys(formData).every(
+        (key) => key === "cajaCompensacion" || formData[key].trim() !== ""
+    );
 
     const calculatePercentages = () => {
         // Variables para contar respuestas "Sí" y "No" por cada sección
@@ -172,147 +174,249 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                     {`Listo, ${userName}!`}
                 </span>
             </div>
+            
+            {showWeightHeightFields ? (
+            // Mostrar campos de peso y altura
+            <>
+                <div style={{ display: "flex", flexDirection: "column", gap: "10px", marginBottom: "20px" }}>
+                    <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                        <label style={{ color: "#000", fontSize: "16px" }}>Cuéntanos, ¿Cuánto pesas? *Kg</label>
+                        <input
+                            type="text"
+                            name="peso"
+                            value={formData.peso}
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                if (/^\d{0,3}$/.test(value)) { 
+                                    handleChange(e);
+                                }
+                            }}
+                            style={{
+                                width: "90%",
+                                margin: "0 auto",
+                                padding: "10px",
+                                borderRadius: "5px",
+                                border: "1px solid #ccc",
+                                backgroundColor: "#fff",
+                                color: "black",
+                                fontSize: "14px",
+                            }}
+                            placeholder="Ejemplo: 70"
+                        />
+                    </div>
 
-            <h2 style={{ color: "#242B56", margin: "10px 0" }}>
-                ¡Generamos tus resultados!
-            </h2>
-            <p style={{ color: "black", margin: "25px 0" }}>
-                <strong>
-                    Antes de finalizar, cuéntanos un poco más sobre ti:
-                </strong>
-            </p>
-            <form
-                style={{
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "15px",
-                }}
-            >
-                {/* Campo Ocupación */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                    <label style={{ color: "#242B56", fontSize: "16px" }}>Ocupación:</label>
-                    <input
-                        type="text"
-                        name="ocupacion"
-                        value={formData.ocupacion}
-                        onChange={handleChange}
-                        onInput={(e) => {
-                            e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
-                        }}
-                        style={{
-                            width: "90%",
-                            margin: "0 auto",
-                            padding: "10px",
-                            borderRadius: "5px",
-                            border: "1px solid #ccc",
-                            backgroundColor: "#fff",
-                            color: "black",
-                            fontSize: "14px",
-                            transition: "border-color 0.3s",
-                        }}
-                        placeholder="Escribe tu ocupación"
-                    />
+                    <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                        <label style={{ color: "#000", fontSize: "16px" }}>Y sabes, ¿Cuánto mides? *mt</label>
+                        <input
+                            type="text"
+                            name="altura"
+                            value={formData.altura}
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                if (/^\d*\.?\d{0,2}$/.test(value) && value.length <= 4) { // Permite hasta 4 caracteres y números con 2 decimales
+                                    handleChange(e);
+                                }
+                            }}
+                            maxLength="4"
+                            style={{
+                                width: "90%",
+                                margin: "0 auto",
+                                padding: "10px",
+                                borderRadius: "5px",
+                                border: "1px solid #ccc",
+                                backgroundColor: "#fff",
+                                color: "black",
+                                fontSize: "14px",
+                            }}
+                            placeholder="Ejemplo: 1.75"
+                        />
+                    </div>
                 </div>
 
-                {/* Campo Empresa/Institución */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                    <label style={{ color: "#242B56", fontSize: "16px" }}>Empresa/Institución:</label>
-                    <input
-                        type="text"
-                        name="empresa"
-                        value={formData.empresa}
-                        onChange={handleChange}
-                        onInput={(e) => {
-                            e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
-                        }}
-                        style={{
-                            width: "90%",
-                            margin: "0 auto",
-                            padding: "10px",
-                            borderRadius: "5px",
-                            border: "1px solid #ccc",
-                            backgroundColor: "#fff",
-                            color: "black",
-                            fontSize: "14px",
-                            transition: "border-color 0.3s",
-                        }}
-                        placeholder="Nombre de la empresa o institución"
-                    />
-                </div>
-
-                {/* Campo Área */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                    <label style={{ color: "#242B56", fontSize: "16px" }}>Área:</label>
-                    <input
-                        type="text"
-                        name="area"
-                        value={formData.area}
-                        onChange={handleChange}
-                        onInput={(e) => {
-                            e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
-                        }}
-                        style={{
-                            width: "90%",
-                            margin: "0 auto",
-                            padding: "10px",
-                            borderRadius: "5px",
-                            border: "1px solid #ccc",
-                            backgroundColor: "#fff",
-                            color: "black",
-                            fontSize: "14px",
-                            transition: "border-color 0.3s",
-                        }}
-                        placeholder="Área de trabajo"
-                    />
-                </div>
-
-                {/* Campo Caja de Compensación */}
-                <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
-                    <label style={{ color: "#242B56", fontSize: "16px" }}>Caja de Compensación:</label>
-                    <input
-                        type="text"
-                        name="cajaCompensacion"
-                        value={formData.cajaCompensacion}
-                        onChange={handleChange}
-                        style={{
-                            width: "90%",
-                            margin: "0 auto",
-                            padding: "10px",
-                            borderRadius: "5px",
-                            border: "1px solid #ccc",
-                            backgroundColor: "#fff",
-                            color: "black",
-                            fontSize: "14px",
-                            transition: "border-color 0.3s",
-                        }}
-                        placeholder="Nombre de la caja de compensación"
-                    />
-                </div>
-
-                {/* Botón Continuar */}
                 <button
                     type="button"
                     style={{
-                        backgroundColor: isFormComplete ? "#73B72B" : "#ccc",
+                        backgroundColor: "#73B72B",
                         color: "#fff",
                         border: "none",
                         borderRadius: "5px",
-                        padding: "12px",
-                        cursor: isFormComplete ? "pointer" : "not-allowed",
-                        marginTop: "15px",
+                        padding: "10px",
+                        cursor: "pointer",
+                        marginBottom: "15px",
                         fontSize: "16px",
-                        transition: "background-color 0.3s, transform 0.2s",
                     }}
-                    onClick={(e) => {
-                        e.preventDefault();
-                        if (isFormComplete) manejarResultados(e);
+                    onClick={() => {
+                        if (formData.peso.trim() !== "" && formData.altura.trim() !== "") {
+                            setShowWeightHeightFields(false); 
+                        } else {
+                            alert("Por favor, completa los campos de peso y altura.");
+                        }
                     }}
-                    disabled={!isFormComplete}
                 >
                     Continuar
                 </button>
-            </form>
+            </>
+        ) : (
+            <>
+                <h2 style={{ color: "#242B56", margin: "10px 0" }}>
+                    ¡Generamos tus resultados!
+                </h2>
+                <p style={{ color: "black", margin: "25px 0" }}>
+                    <strong>
+                        Antes de finalizar, cuéntanos un poco más sobre ti:
+                    </strong>
+                </p>
+                <form
+                    style={{
+                        display: "flex",
+                        flexDirection: "column",
+                        gap: "15px",
+                    }}
+                >
+                    {/* Campo Ocupación */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                        <label style={{ color: "#242B56", fontSize: "16px" }}>Ocupación:</label>
+                        <input
+                            type="text"
+                            name="ocupacion"
+                            value={formData.ocupacion}
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                if (value.length <= 40) { // Limita a 35 caracteres
+                                    handleChange(e);
+                                }
+                            }}
+                            onInput={(e) => {
+                                e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, ""); // Solo letras y espacios
+                            }}
+                            maxLength="40"
+                            style={{
+                                width: "90%",
+                                margin: "0 auto",
+                                padding: "10px",
+                                borderRadius: "5px",
+                                border: "1px solid #ccc",
+                                backgroundColor: "#fff",
+                                color: "black",
+                                fontSize: "14px",
+                                transition: "border-color 0.3s",
+                            }}
+                            placeholder="Escribe tu ocupación"
+                        />
+                    </div>
 
+                    {/* Campo Empresa/Institución */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                        <label style={{ color: "#242B56", fontSize: "16px" }}>Empresa/Institución:</label>
+                        <input
+                            type="text"
+                            name="empresa"
+                            value={formData.empresa}
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                if (value.length <= 35) { // Verifica que no exceda los 20 caracteres
+                                    handleChange(e);
+                                }
+                            }}
+                            onInput={(e) => {
+                                e.target.value = e.target.value.replace(/[^a-zA-Z0-9\s]/g, ""); // Permite solo letras y espacios
+                            }}
+                            maxLength="35"
+                            style={{
+                                width: "90%",
+                                margin: "0 auto",
+                                padding: "10px",
+                                borderRadius: "5px",
+                                border: "1px solid #ccc",
+                                backgroundColor: "#fff",
+                                color: "black",
+                                fontSize: "14px",
+                                transition: "border-color 0.3s",
+                            }}
+                            placeholder="Nombre de la empresa o institución"
+                        />
+                    </div>
+
+                    {/* Campo Área */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                        <label style={{ color: "#242B56", fontSize: "16px" }}>Área:</label>
+                        <input
+                            type="text"
+                            name="area"
+                            value={formData.area}
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                if (value.length <= 30) { // Limita a 40 caracteres
+                                    handleChange(e);
+                                }
+                            }}
+                            onInput={(e) => {
+                                e.target.value = e.target.value.replace(/[^a-zA-Z0-9\s]/g, ""); // Permite letras, números y espacios
+                            }}
+                            maxLength="30"
+                            style={{
+                                width: "90%",
+                                margin: "0 auto",
+                                padding: "10px",
+                                borderRadius: "5px",
+                                border: "1px solid #ccc",
+                                backgroundColor: "#fff",
+                                color: "black",
+                                fontSize: "14px",
+                                transition: "border-color 0.3s",
+                            }}
+                            placeholder="Área de trabajo"
+                        />
+                    </div>
+
+                    {/* Campo Caja de Compensación */}
+                    <div style={{ display: "flex", flexDirection: "column", gap: "5px" }}>
+                        <label style={{ color: "#242B56", fontSize: "16px" }}>Caja de Compensación:</label>
+                        <input
+                            type="text"
+                            name="cajaCompensacion"
+                            value={formData.cajaCompensacion}
+                            onChange={handleChange}
+                            style={{
+                                width: "90%",
+                                margin: "0 auto",
+                                padding: "10px",
+                                borderRadius: "5px",
+                                border: "1px solid #ccc",
+                                backgroundColor: "#fff",
+                                color: "black",
+                                fontSize: "14px",
+                                transition: "border-color 0.3s",
+                            }}
+                            placeholder="Nombre de la caja de compensación"
+                        />
+                    </div>
+
+                    {/* Botón Continuar */}
+                    <button
+                        type="button"
+                        style={{
+                            backgroundColor: isFormComplete ? "#73B72B" : "#ccc",
+                            color: "#fff",
+                            border: "none",
+                            borderRadius: "5px",
+                            padding: "12px",
+                            cursor: isFormComplete ? "pointer" : "not-allowed",
+                            marginTop: "15px",
+                            fontSize: "16px",
+                            transition: "background-color 0.3s, transform 0.2s",
+                        }}
+                        onClick={(e) => {
+                            e.preventDefault();
+                            if (isFormComplete) manejarResultados(e, formData);
+                        }}
+                        disabled={!isFormComplete}
+                    >
+                        Continuar
+                    </button>
+                </form>
+            </>
+        )}
             {showResultados && (
                 <div
                     style={{
@@ -361,10 +465,10 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                             {imageData && <PDFDownloadLink
                                 document={
                                     <MyDocument
-                                        nombre={"Juan Jose Ospina"}
-                                        edad="18"
-                                        empresa={"Zona Franca"}
-                                        Ocupacion="Empleado"
+                                        nombre={`${datos?.name} ${datos?.last_name}`}
+                                        edad={datos.age}
+                                        empresa={datos.company}
+                                        Ocupacion={datos.occupation}
                                         preguntas={preguntas}
                                         answers={answers}
                                         percentages={porcentajes}

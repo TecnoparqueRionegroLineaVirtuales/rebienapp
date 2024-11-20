@@ -4,6 +4,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
     // Estado para almacenar los valores de los campos del formulario
     const [formData, setFormData] = useState({
         nombre: userName,
+        apellido: "",
         tipoDocumento: "",
         numeroDocumento: "",
         fechaNacimiento: "",
@@ -22,7 +23,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
             [name]: value
         }));
     };
-
+    
     // Verificar si todos los campos están completos
     const isFormComplete = Object.values(formData).every((value) => value.trim() !== "");
     
@@ -72,17 +73,42 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
             <form id="miFormulario">
                 {/* Campo Nombre completo */}
                 <div style={{ marginBottom: "15px", textAlign: "left", maxWidth: "91%", marginLeft: "0%" }}>
-                    <label style={{ color: "black", fontSize: "14px" }}>Nombre completo</label>
+                    <label style={{ color: "black", fontSize: "14px" }}>Nombres</label>
                     <input
                         type="text"
                         name="nombre"
                         value={formData.nombre}
                         onChange={(e) => {
-                            if (/^[a-zA-Z\s]*$/.test(e.target.value))
+                            if (/^[a-zA-Z\s]*$/.test(e.target.value) && e.target.value.length <= 40) {
                                 handleChange(e);
-                            setUserName(e.target.value);
+                            }
                         }}
-                        placeholder="Nombre completo"
+                        placeholder="Nombres"
+                        required
+                        style={{
+                            width: "100%",
+                            padding: "12px",
+                            borderRadius: "4px",
+                            border: "1px solid #ccc",
+                            boxShadow: "0px 1px 5px rgba(0, 0, 0, 0.1)",
+                            backgroundColor: "white",
+                            color: "black",
+                            transition: "border-color 0.3s",
+                        }}
+                    />
+                </div>
+                <div style={{ marginBottom: "15px", textAlign: "left", maxWidth: "91%", marginLeft: "0%" }}>
+                    <label style={{ color: "black", fontSize: "14px" }}>Apellidos</label>
+                    <input
+                        type="text"
+                        name="apellido"
+                        value={formData.apellido}
+                        onChange={(e) => {
+                            if (/^[a-zA-Z\s]*$/.test(e.target.value) && e.target.value.length <= 40) {
+                                handleChange(e);
+                            }
+                        }}
+                        placeholder="Apellidos"
                         required
                         style={{
                             width: "100%",
@@ -117,7 +143,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         }}
                     >
                         <option value="">Tipo de documento</option>
-                        <option value="cedula">Cédula</option>
+                        <option value="cc">Cédula</option>
                         <option value="ti">T.I</option>
                     </select>
                 </div>
@@ -130,7 +156,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         name="numeroDocumento"
                         value={formData.numeroDocumento}
                         onChange={(e) => {
-                            if (/^\d*$/.test(e.target.value)) { 
+                            if (/^\d*$/.test(e.target.value) && e.target.value.length <= 20) { // Permite solo números y hasta 30 caracteres
                                 handleChange(e);
                             }
                         }}
@@ -203,9 +229,9 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         }}
                     >
                         <option value="">Selecciona género</option>
-                        <option value="masculino">Masculino</option>
-                        <option value="femenino">Femenino</option>
-                        <option value="otro">Otro</option>
+                        <option value="M">Masculino</option>
+                        <option value="F">Femenino</option>
+                        <option value="O">Otro</option>
                     </select>
                 </div>
 
@@ -217,7 +243,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         name="nacionalidad"
                         value={formData.nacionalidad}
                         onChange={(e) => {
-                            if (/^[a-zA-Z\s]*$/.test(e.target.value)) { 
+                            if (/^[a-zA-Z\s]*$/.test(e.target.value) && e.target.value.length <= 20) {
                                 handleChange(e);
                             }
                         }}
@@ -258,6 +284,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         }}
                     />
                 </div>
+                
 
                 {/* Campo WhatsApp */}
                 <div style={{ marginBottom: "15px", textAlign: "left", maxWidth: "91%", marginLeft: "0%" }}>
@@ -267,7 +294,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         name="whatsapp"
                         value={formData.whatsapp}
                         onChange={(e) => {
-                            if (/^\d*$/.test(e.target.value)) { 
+                            if (/^\d*$/.test(e.target.value) && e.target.value.length <= 12) { // Permite solo números y hasta 30 caracteres
                                 handleChange(e);
                             }
                         }}
@@ -324,7 +351,9 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                     }}
                     onClick={(e) => {
                         e.preventDefault();
-                        if (isFormComplete) comprobar1(e);
+                        if (isFormComplete){
+                            comprobar1(e,formData);
+                        } 
                     }}
                     disabled={!isFormComplete}
                 >
