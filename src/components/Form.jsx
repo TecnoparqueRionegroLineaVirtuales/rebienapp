@@ -1,7 +1,6 @@
 import { useState } from "react";
 
 const Form = ({ showForm, setUserName, comprobar1, userName }) => {
-    // Estado para almacenar los valores de los campos del formulario
     const [formData, setFormData] = useState({
         nombre: userName,
         apellido: "",
@@ -15,7 +14,6 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
         ciudad: ""
     });
 
-    // Función para actualizar los valores de cada campo en el estado
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -24,12 +22,15 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
         }));
     };
 
-    // Verificar si todos los campos están completos
     const isFormComplete = Object.values(formData).every((value) => value.trim() !== "");
 
     const today = new Date();
     const maxDate = new Date(today.getFullYear() - 12, today.getMonth(), today.getDate()).toISOString().split("T")[0]; // Hace 12 años
     const minDate = new Date(today.getFullYear() - 120, today.getMonth(), today.getDate()).toISOString().split("T")[0]; // Hace 120 años
+    const [isEmailValid, setIsEmailValid] = useState(true);
+    const h = (email) => {
+        return /^\w+([.-]?\w+)@\w+([.-]?\w+)(\.\w{2,3})+$/.test(email); 
+    };
 
     return (
         <div
@@ -104,7 +105,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         name="apellido"
                         value={formData.apellido}
                         onChange={(e) => {
-                            if (/^[a-zA-Z\s]*$/.test(e.target.value) && e.target.value.length <= 40) {
+                            if (/^[a-zA-Z\s]*$/.test(e.target.value) && e.target.value.length <= 30) {
                                 handleChange(e);
                             }
                         }}
@@ -156,7 +157,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         name="numeroDocumento"
                         value={formData.numeroDocumento}
                         onChange={(e) => {
-                            if (/^\d*$/.test(e.target.value) && e.target.value.length <= 15) { // Permite solo números y hasta 30 caracteres
+                            if (/^\d*$/.test(e.target.value) && e.target.value.length <= 15) {
                                 handleChange(e);
                             }
                         }}
@@ -182,8 +183,19 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         type="date"
                         name="fechaNacimiento"
                         value={formData.fechaNacimiento}
-                        onChange={handleChange}
-                        max={maxDate} // Fecha máxima establecida como hoy
+                        onChange={(e) => {
+                            const inputDate = e.target.value;
+                            const inputYear = new Date(inputDate).getFullYear();
+                
+                            if (inputYear > 2012) {
+                                alert("El año de nacimiento no puede ser mayor a 2012.");
+                                return;
+                            }
+                
+                            
+                            handleChange(e);
+                        }}
+                        max={maxDate} 
                         required
                         style={{
                             width: "100%",
@@ -270,7 +282,14 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         type="email"
                         name="email"
                         value={formData.email}
-                        onChange={handleChange}
+                        onChange={(e) => {
+                            const email = e.target.value;
+                            setFormData((prevData) => ({
+                                ...prevData,
+                                email,
+                            }));
+                            setIsEmailValid(h(email));
+                        }}
                         placeholder="Correo electrónico"
                         required
                         style={{
@@ -284,6 +303,11 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                             transition: "border-color 0.3s",
                         }}
                     />
+                    {!isEmailValid && (
+                        <span style={{ color: "red", fontSize: "12px" }}>
+                            Por favor, introduce un correo válido.
+                        </span>
+                    )}
                 </div>
 
 
@@ -295,7 +319,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         name="whatsapp"
                         value={formData.whatsapp}
                         onChange={(e) => {
-                            if (/^\d*$/.test(e.target.value) && e.target.value.length <= 12) { // Permite solo números y hasta 30 caracteres
+                            if (/^\d*$/.test(e.target.value) && e.target.value.length <= 12) {
                                 handleChange(e);
                             }
                         }}
@@ -323,12 +347,12 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         value={formData.ciudad}
                         onChange={(e) => {
                             const value = e.target.value;
-                            if (value.length <= 40) { // Permite hasta 35 caracteres
+                            if (value.length <= 35) {
                                 handleChange(e);
                             }
                         }}
                         onInput={(e) => {
-                            e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, ""); // Permite solo letras y espacios
+                            e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, "");
                         }}
                         placeholder="Ciudad de residencia"
                         required
@@ -360,6 +384,10 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                     }}
                     onClick={(e) => {
                         e.preventDefault();
+                        if (!formData.email.endsWith("@gmail.com")) {
+                            alert("Por favor, ingresa una dirección de correo válida que termine en @gmail.com");
+                            return;
+                        }
                         if (isFormComplete) {
                             comprobar1(e, formData);
                         }

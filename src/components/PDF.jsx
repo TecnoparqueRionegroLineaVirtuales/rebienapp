@@ -26,6 +26,7 @@ const styles = StyleSheet.create({
   header: {
     backgroundColor: '#73B72B',
     padding: 8,
+    margintop: '2px',
     color: 'white',
     textAlign: 'center',
     fontWeight: 'bold',
@@ -263,15 +264,15 @@ const MyDocument = ({ nombre, edad, empresa, Ocupacion, preguntas, answers, perc
         </View>
 
         <View style={styles.infoSection}>
-          <Text style={styles.label}>Nombre: </Text>
+          <Text style={styles.label}>Nombre:  </Text>
           <Text style={styles.field}>{nombre}</Text>
           <Text style={styles.label}>Edad:</Text>
           <Text style={styles.field}>{edad1()}</Text>
         </View>
         <View style={styles.infoSection}>
-          <Text style={styles.label}>Empresa:  </Text>
+          <Text style={styles.label}>Empresa: </Text>
           <Text style={styles.field}>{empresa}</Text>
-          <Text style={styles.label}>Ocupacion:  </Text>
+          <Text style={styles.label}>Ocupacion: </Text>
           <Text style={styles.field}>{Ocupacion}</Text>
         </View>
 
@@ -283,7 +284,7 @@ const MyDocument = ({ nombre, edad, empresa, Ocupacion, preguntas, answers, perc
         </View>
 
 
-        <View style={{ width: '85%', alignSelf: 'center', marginVertical: 10, marginTop: 1 }}>
+        <View style={{ width: '85%', alignSelf: 'center', marginVertical: 10, marginTop: -5 }}>
           {/* Actividad Física & Nutrición */}
           <View style={[styles.tableRow, { borderBottomWidth: 1, borderColor: '#000' }]}>
             <Image src={imagen2} style={[styles.imageOutsideTable, { top: 35 }]} />
@@ -415,7 +416,7 @@ const MyDocument = ({ nombre, edad, empresa, Ocupacion, preguntas, answers, perc
 
 
 
-        <View style={{ width: '85%', alignSelf: 'center', marginVertical: 10, marginTop: 30 }}>
+        <View style={{ width: '85%', alignSelf: 'center', marginVertical: 10, marginTop: 45 }}>
           {/* Título de Resultados Consolidados */}
           <View style={[styles.Resultados]}>
             <View style={{ flexDirection: 'row', backgroundColor: '#A0A7B4', borderTopWidth: 1, borderBottomWidth: 1, borderColor: '#000' }}>

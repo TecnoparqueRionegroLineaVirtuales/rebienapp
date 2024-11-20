@@ -296,13 +296,17 @@ function App() {
   };
 
   const handleDocumentNumberChange = (e) => {
-    setDocumentNumber(e.target.value);
-    if (!isEditingMode) {
-      setShowContinueButton(e.target.value.length > 0);
-    } else {
-      setShowContinueButton(false);
+    const value = e.target.value.replace(/\D/g, ""); 
+    if (value.length <= 20) { 
+        setDocumentNumber(value);
     }
-  };
+
+    if (!isEditingMode) {
+        setShowContinueButton(value.length > 0); 
+    } else {
+        setShowContinueButton(false);
+    }
+};
 
   const handleContinueClick = () => {
     setDocumentNumberFixed(documentNumber);
@@ -320,10 +324,12 @@ function App() {
   };
 
   const handleCompanyNameInputChange = (e) => {
-    const value = e.target.value;
-    setCompanyName(value);
-    setShowCompanyContinueButton(true);
-  };
+    const value = e.target.value.replace(/[^a-zA-Z\s]/g, ""); 
+    if (value.length <= 50) {
+        setCompanyName(value);
+    }
+    setShowCompanyContinueButton(true); 
+};
 
   const handleCompanyNameSubmit = () => {
     setCompanyNameFixed(companyName);
@@ -484,7 +490,6 @@ function App() {
   const comprobar1 = async (e, formData) => {
     e.preventDefault();
     setDatosEnviar(formData)
-    // const questionsResponse = await axios.post("http://localhost:8018/api/questions/");
     setShowGreeting(false);
     setShowForm(false);
   }
@@ -705,7 +710,6 @@ function App() {
   ];
 
   useEffect(() => {
-    // Función para desplazarse al final
     const scrollToBottom = () => {
       if (messagesEndRef.current) {
         messagesEndRef.current.scrollIntoView({ behavior: 'smooth' });
@@ -1170,7 +1174,6 @@ function App() {
                     botAvatar="../public/img/Rebien.png"
                     style={{
                       width: "100%",
-                      // height: "480px",
                       height: "100%",
                       overflow: "auto",
                     }}

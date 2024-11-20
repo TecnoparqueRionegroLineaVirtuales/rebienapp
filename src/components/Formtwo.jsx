@@ -11,7 +11,6 @@ import ChartDataLabels from 'chartjs-plugin-datalabels';
 ChartJS.register(ArcElement, Tooltip, Legend,ChartDataLabels);
 
 const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answers, datos }) => {
-    // Estados para almacenar los valores de los campos
     const [formData, setFormData] = useState({
         ocupacion: "",
         empresa: "",
@@ -29,7 +28,6 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
     useEffect(() => {
         console.log(answers)
         setChartData(calculatePercentages())
-        // Espera un segundo para que el gráfico se renderice completamente antes de capturarlo
         setTimeout(() => {
             if (chartRef.current) {
                 html2canvas(chartRef.current.canvas).then((canvas) => {
@@ -41,7 +39,6 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
 
 
 
-    // Función para actualizar los valores de los campos
     const handleChange = (e) => {
         const { name, value } = e.target;
         setFormData((prevData) => ({
@@ -50,7 +47,6 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
         }));
     };
 
-    // Verificar si todos los campos están completos
     const isFormComplete = Object.keys(formData).every(
         (key) => key === "cajaCompensacion" || formData[key].trim() !== ""
     );
@@ -122,8 +118,6 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                 align: 'center',
             },
             legend: {
-                // display: true,
-                // position: 'top',
                 display: false
             },
         },
@@ -186,11 +180,13 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                             name="peso"
                             value={formData.peso}
                             onChange={(e) => {
-                                const value = e.target.value;
-                                if (/^\d{0,3}$/.test(value)) { 
-                                    handleChange(e);
-                                }
+                                const value = e.target.value.replace(/\D/g, ""); 
+                                setFormData((prevData) => ({
+                                    ...prevData,
+                                    peso: value,
+                                }));
                             }}
+                            inputMode="numeric"
                             style={{
                                 width: "90%",
                                 margin: "0 auto",
@@ -212,11 +208,13 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                             name="altura"
                             value={formData.altura}
                             onChange={(e) => {
-                                const value = e.target.value;
-                                if (/^\d*\.?\d{0,2}$/.test(value) && value.length <= 4) { // Permite hasta 4 caracteres y números con 2 decimales
-                                    handleChange(e);
-                                }
+                                const value = e.target.value.replace(/[^0-9.]/g, "");
+                                setFormData((prevData) => ({
+                                    ...prevData,
+                                    altura: value,
+                                }));
                             }}
+                            inputMode="decimal"
                             maxLength="4"
                             style={{
                                 width: "90%",
@@ -250,10 +248,10 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                             const peso = parseFloat(formData.peso);
                             const altura = parseFloat(formData.altura);
         
-                            if (peso <= 200 && altura <= 2.20) {
-                                setShowWeightHeightFields(false); // Oculta los campos
+                            if (peso <= 500 && altura <= 2.95) {
+                                setShowWeightHeightFields(false); 
                             } else {
-                                alert("Por favor, asegúrate de que el peso sea menor a 200 kg y la altura menor a 2.20 m.");
+                                alert("Por favor, asegúrate de que el peso sea menor a 500 kg y la altura menor a 2.95 m.");
                             }
                         } else {
                             alert("Por favor, completa los campos de peso y altura.");
@@ -289,12 +287,12 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                             value={formData.ocupacion}
                             onChange={(e) => {
                                 const value = e.target.value;
-                                if (value.length <= 40) { // Limita a 35 caracteres
+                                if (value.length <= 35) { 
                                     handleChange(e);
                                 }
                             }}
                             onInput={(e) => {
-                                e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, ""); // Solo letras y espacios
+                                e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, ""); 
                             }}
                             maxLength="40"
                             style={{
@@ -321,14 +319,14 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                             value={formData.empresa}
                             onChange={(e) => {
                                 const value = e.target.value;
-                                if (value.length <= 35) { // Verifica que no exceda los 20 caracteres
+                                if (value.length <= 35) { 
                                     handleChange(e);
                                 }
                             }}
                             onInput={(e) => {
-                                e.target.value = e.target.value.replace(/[^a-zA-Z0-9\s]/g, ""); // Permite solo letras y espacios
+                                e.target.value = e.target.value.replace(/[^a-zA-Z0-9\s]/g, ""); 
                             }}
-                            maxLength="35"
+                            maxLength="30"
                             style={{
                                 width: "90%",
                                 margin: "0 auto",
@@ -353,12 +351,12 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                             value={formData.area}
                             onChange={(e) => {
                                 const value = e.target.value;
-                                if (value.length <= 30) { // Limita a 40 caracteres
+                                if (value.length <= 30) { 
                                     handleChange(e);
                                 }
                             }}
                             onInput={(e) => {
-                                e.target.value = e.target.value.replace(/[^a-zA-Z0-9\s]/g, ""); // Permite letras, números y espacios
+                                e.target.value = e.target.value.replace(/[^a-zA-Z0-9\s]/g, ""); 
                             }}
                             maxLength="30"
                             style={{
@@ -385,7 +383,7 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                             value={formData.cajaCompensacion}
                             onChange={(e) => {
                                 const value = e.target.value;
-                                if (value.length <= 35) { // Restricción a máximo 35 caracteres
+                                if (value.length <= 30) { 
                                     handleChange(e);
                                 }
                             }}
@@ -503,7 +501,6 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                                 )}
                             </PDFDownloadLink>}
                         </span>
-                        {/* <img src={imageData} alt={"imagen"}></img> */}
                     </h2>
                     <p
                         style={{

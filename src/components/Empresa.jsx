@@ -189,7 +189,6 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                             </div>
                         )}
 
-                        {/* Campo para el nombre de la empresa */}
                         {message.hasInput && showCompanyNameInput && (
                             <div style={{ marginTop: '5px' }}>
                                 {isCompanyNameFixed ? (
@@ -298,7 +297,6 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                 </div>
             ))}
 
-            {/* Nuevo contenedor para mostrar los datos confirmados */}
             {showCorrectContainer && (
                 <div
                     style={{
@@ -346,7 +344,6 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                         </div>
                     </div>
 
-                    {/* Imagen del logo para el mensaje de confirmación */}
                     {visibleConfirmationMessages.map((message) => (
                         <div
                             key={message.id}
