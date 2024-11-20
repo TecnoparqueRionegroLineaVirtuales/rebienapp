@@ -247,7 +247,14 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                     }}
                     onClick={() => {
                         if (formData.peso.trim() !== "" && formData.altura.trim() !== "") {
-                            setShowWeightHeightFields(false); 
+                            const peso = parseFloat(formData.peso);
+                            const altura = parseFloat(formData.altura);
+        
+                            if (peso <= 200 && altura <= 2.20) {
+                                setShowWeightHeightFields(false); // Oculta los campos
+                            } else {
+                                alert("Por favor, asegúrate de que el peso sea menor a 200 kg y la altura menor a 2.20 m.");
+                            }
                         } else {
                             alert("Por favor, completa los campos de peso y altura.");
                         }
@@ -376,7 +383,12 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                             type="text"
                             name="cajaCompensacion"
                             value={formData.cajaCompensacion}
-                            onChange={handleChange}
+                            onChange={(e) => {
+                                const value = e.target.value;
+                                if (value.length <= 35) { // Restricción a máximo 35 caracteres
+                                    handleChange(e);
+                                }
+                            }}
                             style={{
                                 width: "90%",
                                 margin: "0 auto",

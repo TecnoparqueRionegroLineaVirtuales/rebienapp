@@ -23,13 +23,13 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
             [name]: value
         }));
     };
-    
+
     // Verificar si todos los campos están completos
     const isFormComplete = Object.values(formData).every((value) => value.trim() !== "");
-    
+
     const today = new Date();
-    const maxDate = today.toISOString().split("T")[0]; 
-    const minDate = new Date(today.getFullYear() - 120, today.getMonth(), today.getDate()).toISOString().split("T")[0]; 
+    const maxDate = new Date(today.getFullYear() - 12, today.getMonth(), today.getDate()).toISOString().split("T")[0]; // Hace 12 años
+    const minDate = new Date(today.getFullYear() - 120, today.getMonth(), today.getDate()).toISOString().split("T")[0]; // Hace 120 años
 
     return (
         <div
@@ -156,7 +156,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         name="numeroDocumento"
                         value={formData.numeroDocumento}
                         onChange={(e) => {
-                            if (/^\d*$/.test(e.target.value) && e.target.value.length <= 20) { // Permite solo números y hasta 30 caracteres
+                            if (/^\d*$/.test(e.target.value) && e.target.value.length <= 15) { // Permite solo números y hasta 30 caracteres
                                 handleChange(e);
                             }
                         }}
@@ -196,6 +196,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                             transition: "border-color 0.3s",
                             appearance: "none",
                         }}
+
                     />
                     <span style={{
                         position: "absolute",
@@ -284,7 +285,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         }}
                     />
                 </div>
-                
+
 
                 {/* Campo WhatsApp */}
                 <div style={{ marginBottom: "15px", textAlign: "left", maxWidth: "91%", marginLeft: "0%" }}>
@@ -320,7 +321,15 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         type="text"
                         name="ciudad"
                         value={formData.ciudad}
-                        onChange={handleChange}
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            if (value.length <= 40) { // Permite hasta 35 caracteres
+                                handleChange(e);
+                            }
+                        }}
+                        onInput={(e) => {
+                            e.target.value = e.target.value.replace(/[^a-zA-Z\s]/g, ""); // Permite solo letras y espacios
+                        }}
                         placeholder="Ciudad de residencia"
                         required
                         style={{
@@ -351,9 +360,9 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                     }}
                     onClick={(e) => {
                         e.preventDefault();
-                        if (isFormComplete){
-                            comprobar1(e,formData);
-                        } 
+                        if (isFormComplete) {
+                            comprobar1(e, formData);
+                        }
                     }}
                     disabled={!isFormComplete}
                 >
