@@ -1,4 +1,11 @@
 import { useState } from "react";
+import amarillo from '../assets/img/logo-amarillo.png';
+import logo from '../assets/img/Rebien.png';
+import morado from  '../assets/img/logo-morado.png';
+import azul from '../assets/img/logo-azul.png';
+import fucsia from '../assets/img/logo-fucsia.png';
+import formIcon from '../assets/img/form-icono.png';
+import iconoR from '../assets/img/IconoR.png';
 
 const Form = ({ showForm, setUserName, comprobar1, userName }) => {
     const [formData, setFormData] = useState({
@@ -60,7 +67,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                 }}
             >
                 <img
-                    src="../assets/img/form-icon.png"
+                    src={formIcon}
                     alt="Icono Formulario"
                     style={{
                         width: "24px",

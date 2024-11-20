@@ -2,6 +2,13 @@ import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAngleLeft } from '@fortawesome/free-solid-svg-icons';
 import { faInstagram, faFacebook } from "@fortawesome/free-brands-svg-icons";
+import amarillo from '../assets/img/logo-amarillo.png';
+import logo from '../assets/img/Rebien.png';
+import morado from  '../assets/img/logo-morado.png';
+import azul from '../assets/img/logo-azul.png';
+import fucsia from '../assets/img/logo-fucsia.png';
+import formIcon from '../assets/img/form-icono.png';
+import iconoR from '../assets/img/IconoR.png';
 
 const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, showDropdown, setShowDropdown,
     selectedDocumentType, setSelectedDocumentType,
@@ -337,7 +344,7 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                         />
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                        <img src="../assets/img/Rebien.png" alt="ReBien Logo" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+                        <img src={logo} alt="ReBien Logo" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
                         <div>
                             <h2 style={{ margin: 0, color: '#242B56' }}>¡ReBien!</h2>
                             <p style={{ margin: 0, color: '#000' }}>Ya estás registrado</p>

@@ -8,6 +8,14 @@ import "./assets/App.css";
 import Form from "./components/Form";
 import NewForm from "./components/Formtwo";
 import ShowNextEmpresas from "./components/Empresa";
+import amarillo from './assets/img/logo-amarillo.png';
+import logo from './assets/img/Rebien.png';
+import morado from  './assets/img/logo-morado.png';
+import azul from './assets/img/logo-azul.png';
+import fucsia from './assets/img/logo-fucsia.png';
+import formIcon from './assets/img/form-icono.png';
+import iconoR from './assets/img/IconoR.png';
+
 
 function App() {
   const [data, setData] = useState([]);
@@ -57,7 +65,7 @@ function App() {
     {
       id: 1,
       text: "Estamos list@s para evaluar cómo están tus hábitos en cuatro ámbitos humanos:",
-      img: "./assets/img/Rebien.png",
+      img: logo,
     },
     {
       id: 2,
@@ -65,7 +73,7 @@ function App() {
         <div>
           <div style={{ display: "flex", alignItems: "center", margin: "5px 0" }}>
             <img
-              src="./assets/img/logo-amarillo.png"
+              src= {amarillo}
               alt="Actividad Física & Nutrición"
               style={{ width: "20px", height: "20px", marginRight: "5px" }}
             />
@@ -73,7 +81,7 @@ function App() {
           </div>
           <div style={{ display: "flex", alignItems: "center", margin: "5px 0" }}>
             <img
-              src="./assets/img/logo-morado.png"
+              src={morado}
               alt="Salud Mental & Bienestar"
               style={{ width: "20px", height: "20px", marginRight: "5px" }}
             />
@@ -81,7 +89,7 @@ function App() {
           </div>
           <div style={{ display: "flex", alignItems: "center", margin: "5px 0" }}>
             <img
-              src="./assets/img/logo-azul.png"
+              src={azul}
               alt="Cultura & Entretenimiento"
               style={{ width: "20px", height: "20px", marginRight: "5px" }}
             />
@@ -89,7 +97,7 @@ function App() {
           </div>
           <div style={{ display: "flex", alignItems: "center", margin: "5px 0" }}>
             <img
-              src="./assets/img/logo-fucsia.png"
+              src={fucsia}
               alt="Belleza & Autocuidado"
               style={{ width: "20px", height: "20px", marginRight: "5px" }}
             />
@@ -97,12 +105,12 @@ function App() {
           </div>
         </div>
       ),
-      img: "./assets/img/Rebien.png",
+      img: logo,
     },
     {
       id: 3,
       text: "Primero, regálanos tus datos de contacto:",
-      img: "./assets/img/Rebien.png",
+      img: logo,
     },
     {
       id: 4,
@@ -133,7 +141,7 @@ function App() {
           </button>
         </div>
       ),
-      img: "./assets/img/Rebien.png",
+      img: logo,
     },
   ];
 
@@ -180,17 +188,17 @@ function App() {
     {
       id: 1,
       text: "Selecciona tu tipo de Documento",
-      img: "./assets/img/Rebien.png",
+      img: logo,
     },
     {
       id: 2,
       text: "Tipo Documento:",
-      img: "./assets/img/Rebien.png",
+      img: logo,
     },
     {
       id: 3,
       text: "Ahora escribe el numero de documento de tu empresa",
-      img: "./assets/img/Rebien.png",
+      img: logo,
     },
 
   ];
@@ -236,17 +244,17 @@ function App() {
     {
       id: 1,
       text: `${companyNameFixed} ¿Cómo puedo acompañarte hoy?`,
-      img: "./assets/img/Rebien.png",
+      img: logo,
     },
     {
       id: 2,
       text: `Déjanos un mensaje y en breve me comunicaré con tu empresa.`,
-      img: "./assets/img/Rebien.png",
+      img: logo,
     },
     {
       id: 3,
       text: `Siguenos en las redes sociales.`,
-      img: "./assets/img/Rebien.png",
+      img: logo,
     },
 
   ];
@@ -316,7 +324,7 @@ function App() {
     const newMessage = {
       id: visibleEmpresaMessages.length + 1,
       text: "Por favor ingresa el Nombre de la empresa",
-      img: "./assets/img/Rebien.png",
+      img: logo,
       hasInput: true
     };
 
@@ -402,7 +410,7 @@ function App() {
           </div>
         </>
       ),
-      img: "./assets/img/Rebien.png",
+      img: logo,
     };
 
     setVisibleEmpresaMessages((prevMessages) => [
@@ -463,7 +471,7 @@ function App() {
           </p>
         </>
       ),
-      img: "./assets/img/Rebien.png",
+      img: logo,
     };
 
     setVisibleEmpresaMessages((prevMessages) => [
@@ -693,7 +701,7 @@ function App() {
       component: (
         <div style={{ display: "flex", alignItems: "center" }}>
           <img
-            src="./assets/img/Rebien.png"
+            src={logo}
             style={{ width: "40px", height: "40px", marginRight: "10px" }}
             alt="Rebien"
           />
@@ -749,7 +757,7 @@ function App() {
         onClick={() => setShowChatBot(!showChatBot)}
       >
         <img
-          src="./assets/img/Rebien.png"
+          src={logo}
           alt="Icono ChatBot"
           style={{ width: "100%", height: "100%" }}
         />
@@ -804,7 +812,7 @@ function App() {
                 }}
               >
                 <img
-                  src="./assets/img/Rebien.png"
+                  src={logo}
                   alt="Rebien"
                   style={{
                     width: "80px",
@@ -918,7 +926,7 @@ function App() {
                   }}
                 />
                 <img
-                  src="./assets/img/Rebien.png"
+                  src={logo}
                   alt="Icono"
                   style={{
                     width: "60px",
@@ -1153,7 +1161,7 @@ function App() {
                         }}
                       >
                         <img
-                          src="./assets/img/Rebien.png"
+                          src={logo}
                           alt="Rebien"
                           style={{
                             width: "50px",
@@ -1172,7 +1180,7 @@ function App() {
                       backgroundColor: "transparent",
                       color: "#fff",
                     }}
-                    botAvatar="./assets/img/Rebien.png"
+                    botAvatar={logo}
                     style={{
                       width: "100%",
                       height: "100%",

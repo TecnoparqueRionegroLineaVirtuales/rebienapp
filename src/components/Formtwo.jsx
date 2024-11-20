@@ -7,6 +7,13 @@ import { Pie } from 'react-chartjs-2';
 import html2canvas from 'html2canvas';
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from 'chart.js';
 import ChartDataLabels from 'chartjs-plugin-datalabels';
+import amarillo from '../assets/img/logo-amarillo.png';
+import logo from '../assets/img/Rebien.png';
+import morado from  '../assets/img/logo-morado.png';
+import azul from '../assets/img/logo-azul.png';
+import fucsia from '../assets/img/logo-fucsia.png';
+import formIcon from '../assets/img/form-icono.png';
+import iconoR from '../assets/img/IconoR.png';
 
 ChartJS.register(ArcElement, Tooltip, Legend,ChartDataLabels);
 
@@ -156,7 +163,7 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                 }}
             >
                 <img
-                    src="../assets/img/Rebien.png"
+                    src={logo}
                     alt="Rebien"
                     style={{
                         width: "80px",
@@ -454,7 +461,7 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                         }}
                     >
                         <img
-                            src="../assets/img/Rebien.png"
+                            src={logo}
                             alt="Rebien"
                             style={{
                                 width: "80px",
