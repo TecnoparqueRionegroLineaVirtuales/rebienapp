@@ -337,7 +337,7 @@ const ShowNextEmpresas = ({ visibleEmpresaMessages, setVisibleEmpresaMessages, s
                         />
                     </div>
                     <div style={{ display: 'flex', alignItems: 'center', marginBottom: '10px' }}>
-                        <img src="./public/img/Rebien.png" alt="ReBien Logo" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
+                        <img src="../assets/img/Rebien.png" alt="ReBien Logo" style={{ width: '50px', height: '50px', marginRight: '10px' }} />
                         <div>
                             <h2 style={{ margin: 0, color: '#242B56' }}>¡ReBien!</h2>
                             <p style={{ margin: 0, color: '#000' }}>Ya estás registrado</p>

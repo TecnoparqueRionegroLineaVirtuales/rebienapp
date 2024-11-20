@@ -60,7 +60,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                 }}
             >
                 <img
-                    src="../public/img/form-icon.png"
+                    src="../assets/img/form-icon.png"
                     alt="Icono Formulario"
                     style={{
                         width: "24px",

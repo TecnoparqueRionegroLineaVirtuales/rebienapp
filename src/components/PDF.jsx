@@ -1,11 +1,11 @@
 
 import React from 'react';
 import { Document, Page, Text, View, StyleSheet, PDFDownloadLink, Image } from '@react-pdf/renderer';
-import imagen1 from "../../public/img/Rebien.png"
-import imagen2 from "../../public/img/logo-amarillo.png"
-import imagen3 from "../../public/img/logo-morado.png"
-import imagen4 from "../../public/img/logo-azul.png"
-import imagen5 from "../../public/img/logo-fucsia.png"
+import imagen1 from "../assets/img/Rebien.png"
+import imagen2 from "../assets/img/logo-amarillo.png"
+import imagen3 from "../assets/img/logo-morado.png"
+import imagen4 from "../assets/img/logo-azul.png"
+import imagen5 from "../assets/img/logo-fucsia.png"
 
 
 

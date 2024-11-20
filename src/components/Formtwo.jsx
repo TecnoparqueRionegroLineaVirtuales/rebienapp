@@ -156,7 +156,7 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                 }}
             >
                 <img
-                    src="../public/img/Rebien.png"
+                    src="../assets/img/Rebien.png"
                     alt="Rebien"
                     style={{
                         width: "80px",
@@ -454,7 +454,7 @@ const NewForm = ({ showResultados, userName, manejarResultados, preguntas, answe
                         }}
                     >
                         <img
-                            src="../public/img/Rebien.png"
+                            src="../assets/img/Rebien.png"
                             alt="Rebien"
                             style={{
                                 width: "80px",
