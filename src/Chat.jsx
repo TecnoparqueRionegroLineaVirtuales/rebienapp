@@ -739,6 +739,7 @@ function App() {
 
   return (
     <div>
+      <img src={`${logo}`} style={{display: "flex", justifyContent: "center", width: "100%", height: "100%"}} />
       <button
         style={{
           position: "fixed",
