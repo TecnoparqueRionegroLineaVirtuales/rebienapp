@@ -534,7 +534,7 @@ function App() {
       occupation: formData.ocupacion,
       age: datosEnviar.fechaNacimiento
     })
-    let respuesta1 = await axios.post("http://localhost:8018/api/accounts/", data);
+    let respuesta1 = await axios.post("https://api.somosrebien.co/api/accounts/", data);
     if (respuesta1.data) {
       console.log(respuesta1.data)
       let data1, answer
@@ -545,7 +545,7 @@ function App() {
           account: respuesta1.data?.id,
           question: index + 1
         }
-        const respuesta = await axios.post("http://localhost:8018/api/responses/", data1);
+        const respuesta = await axios.post("https://api.somosrebien.co/api/responses/", data1);
       });
       setShowResultados(true)
     }
@@ -560,7 +560,7 @@ function App() {
 
   const fetchData = async () => {
     try {
-      const questionsResponse = await axios.get("http://localhost:8018/api/questions/");
+      const questionsResponse = await axios.get("https://api.somosrebien.co/api/questions/");
       console.log(questionsResponse)
       if (questionsResponse.data) {
         const questions = questionsResponse.data;
