@@ -153,6 +153,7 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                         <option value="">Tipo de documento</option>
                         <option value="cc">Cédula</option>
                         <option value="ti">T.I</option>
+                        <option value="otro">Otro</option>
                     </select>
                 </div>
 
@@ -295,10 +296,8 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                                 ...prevData,
                                 email,
                             }));
-                            setIsEmailValid(h(email));
                         }}
                         placeholder="Correo electrónico"
-                        required
                         style={{
                             width: "100%",
                             padding: "12px",
@@ -310,11 +309,6 @@ const Form = ({ showForm, setUserName, comprobar1, userName }) => {
                             transition: "border-color 0.3s",
                         }}
                     />
-                    {!isEmailValid && (
-                        <span style={{ color: "red", fontSize: "12px" }}>
-                            Por favor, introduce un correo válido.
-                        </span>
-                    )}
                 </div>
 
 
